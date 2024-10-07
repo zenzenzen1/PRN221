@@ -1,0 +1,38 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model LoadDB_Razor.Pages.MyView.IndexModel
+@using LoadDB_Razor.Models;
+@{
+    Layout = "Bai1/_Bai1Layout";
+}
+<a asp-page="Index1"></a>
+<h2>Welcome PRN211</h2>
+<a asp-page="../CreateStudent/1.GenderCB_DepartmentCB/CreateStudent" >Create Student</a>
+<table>
+    <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td>Gender</td>
+        <td>Department</td>
+        <td>DOB</td>
+        <td>GPA</td>
+        <td>Action</td>
+    </tr>
+    @foreach (Student s in Model.Students.OrderByDescending(s => s.Id))
+    {
+        <tr>
+            <td>@s.Id</td>
+            <td>@s.Name</td>
+            <td>
+                <input type="checkbox" @(s.Gender ? "checked": "") /> 
+                Male/Female
+            </td> 
+            <td>@s.Depart.Name</td>
+            <td>@s.Dob</td>
+            <td>@s.Gpa</td>
+            <td>
+                <a href=@($"/UpdateStudent/1?id={s.Id}")>Update</a>
+            </td>
+        </tr>
+    }
+</table>

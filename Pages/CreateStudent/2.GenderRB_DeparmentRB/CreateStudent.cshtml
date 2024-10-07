@@ -1,0 +1,70 @@
+﻿@page "/CreateStudent/2"
+@model LoadDb.Pages.CreateStudent2.CreateStudentModel
+@using LoadDB_Razor.Models;
+@using Newtonsoft.Json;
+@{
+    <form method="post">
+        <table>
+            <tr>
+                <td>
+                    <label asp-for="Student.Id "></label>
+                </td>
+                <td>
+                    <input asp-for="Student.Id" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Student.Name"></label>
+
+                </td>
+                <td>
+                    <input asp-for="Student.Name" />
+
+    
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="gender">Gender</label>
+                </td>
+                <td>
+                    <input type="radio" id="genderMale" name="gender" value="male" @(Model.Student != null && Model.Student.Gender ? "checked" : "") /> 
+                    <label for="genderMale">Male</label>
+                    <input type="radio" id="genderFemale" name="gender" value="female" @(Model.Student != null && Model.Student.Gender ? "" : "checked")/> 
+                    <label for="genderFemale">Female</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label >Department</label>
+                </td>
+                <td>
+                    @foreach (var department in PRN221_DBContext.Instance.Departments)
+                    {
+                        <input 
+                            type="radio" id="@department.Id" name="departmentId" value="@department.Id" 
+                            @(Model.Student != null && Model.Student.DepartId == department.Id ? "checked" : "") />
+                        <label for="@department.Id">@department.Name</label> <br />
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Student.Dob"></label>
+                </td>
+                <td>
+                    <input asp-for="Student.Dob" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Student.Gpa"></label>
+                </td>
+                <td>
+                    <input asp-for="Student.Gpa" />
+                </td>
+        </table>
+        <button type="submit">Create</button>
+    </form>
+}

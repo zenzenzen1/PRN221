@@ -1,0 +1,74 @@
+﻿@page "/UpdateStudent/3"
+@model LoadDb.Pages.MyView.UpdateStudent3.UpdateStudentModel
+@using LoadDB_Razor.Models;
+@{
+}
+<h1>Update Student</h1>
+<form method="post">
+    <table>
+        <tr>
+            <td>
+                <label asp-for="Student.Id "></label>
+            </td>
+            <td>
+                <input asp-for="Student.Id" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Student.Name"></label>
+
+            </td>
+            <td>
+                <input asp-for="Student.Name" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="gender">Gender</label>
+            </td>
+            <td>
+                <select name="gender" asp-items="@(new List<SelectListItem>(){
+                    new SelectListItem("Male", "male", Model.Student != null && Model.Student.Gender == true),
+                    new SelectListItem("Female", "Female", Model.Student != null && Model.Student.Gender == false){
+                    },
+                })">
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Department</label>
+            </td>
+            <td>
+                <select name="departmentId">
+                    @foreach (Department d in PRN221_DBContext.Instance.Departments)
+                    {
+                        if(Model.Student != null && Model.Student.DepartId.Equals(d.Id)){
+                            <option selected value="@d.Id">@d.Name</option>
+                        }
+                        else{
+                            <option value="@d.Id">@d.Name</option>
+                        }
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Student.Dob"></label>
+            </td>
+            <td>
+                <input asp-for="Student.Dob" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Student.Gpa"></label>
+            </td>
+            <td>
+                <input asp-for="Student.Gpa" />
+            </td>
+    </table>
+    <button type="submit">Update</button>
+</form>

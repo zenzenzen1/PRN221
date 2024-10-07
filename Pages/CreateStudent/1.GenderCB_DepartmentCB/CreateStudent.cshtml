@@ -1,0 +1,98 @@
+﻿@page "/CreateStudent/1"
+@model LoadDb.Pages.CreateStudent1.CreateStudentModel
+@using LoadDB_Razor.Models;
+@using Microsoft.EntityFrameworkCore;
+@{
+    <form method="post">
+        <table>
+            <tr>
+                <td>
+                    <label asp-for="Student.Id "></label>
+                </td>
+                <td>
+                    <input asp-for="Student.Id" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Student.Name"></label>
+
+                </td>
+                <td>
+                    <input asp-for="Student.Name" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="gender">Gender</label>
+                </td>
+                <td>
+                    <input type="checkbox" id="gender" name="gender" value="male" /> 
+                    <label for="gender">Male/Female</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label >Department</label>
+                </td>
+                <td>
+                    @foreach (var department in PRN221_DBContext.Instance.Departments)
+                    {
+                        <input 
+                            type="checkbox" id="@department.Id" name="departmentId" value="@department.Id" />
+                        <label for="@department.Id">@department.Name</label> <br />
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Student.Dob"></label>
+                </td>
+                <td>
+                    <input asp-for="Student.Dob" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Student.Gpa"></label>
+                </td>
+                <td>
+                    <input asp-for="Student.Gpa" />
+                </td>
+        </table>
+        <button type="submit">Create</button>
+    </form>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script type="text/javascript">
+        var departments = [...@(Json.Serialize(PRN221_DBContext.Instance.Departments.ToList()))];
+        console.log({departments});
+        
+        departments.forEach(department => {
+            document.getElementById(department.id).addEventListener('change', function (e) {
+                departments.forEach(department => {
+                    console.log(department.id, {value: e.target.value});
+                    $("#" + department.id).prop('checked', department.id == e.target.value);
+                });
+            });
+        })
+        
+        departments.some(d => $('#' + d.id).prop('checked')) || $('#' + departments[0].id).prop('checked', true);
+        @* $("[name='department']").change(function (e) {
+            departments.forEach(department => {
+                if (department.id == e.target.value) {
+                    $('#' + department.id).prop('checked', true);
+                }
+                else{
+                    $('#' + department.id).prop('checked', false);
+                }
+            });
+        }); *@
+    </script>
+
+}

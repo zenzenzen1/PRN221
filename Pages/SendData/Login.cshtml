@@ -1,0 +1,25 @@
+@page
+@model LoadDB_Razor.Pages.SendData.LoginModel;
+@{
+    
+}
+<h1>Welcome to Login</h1>
+<h2>User: @Model.UserName</h2>
+<h2>Password: @Model.Password</h2>
+
+
+@* <form method="post">
+    <label>User</label>
+    <input type="text" name="username" />
+    <label>Password</label>
+    <input type="text" name="password" /> <br />
+    <input type="submit" value="Login" />
+</form> *@
+
+<form method="post">
+    <label>Username</label>
+    <input asp-for="UserName"/> <br />
+    <label>Password</label>
+    <input asp-for="Password"/> <br />
+    
+</form>

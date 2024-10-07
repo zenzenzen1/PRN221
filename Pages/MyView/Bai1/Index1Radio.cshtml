@@ -1,0 +1,33 @@
+@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model LoadDB_Razor.Pages.MyView.Bai1.IndexModel
+@using LoadDB_Razor.Models;
+@{
+    Layout = "Bai1/_Bai1Layout";
+}
+
+<h2>Welcome PRN211</h2>
+<table>
+    <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td>Gender</td>
+        <td>Department</td>
+        <td>DOB</td>
+        <td>GPA</td>
+    </tr>
+    @foreach (Student s in Model.Students)
+    {
+        <tr>
+            <td>@s.Id</td>
+            <td>@s.Name</td>
+            <td>
+                <input type="radio" @(s.Gender ? "checked" : "") /> Male
+                <input type="radio" @(s.Gender ? "" : "checked") /> Female
+            </td>
+            <td>@s.Depart.Name</td>
+            <td>@s.Dob</td>
+            <td>@s.Gpa</td>
+        </tr>
+    }
+</table>

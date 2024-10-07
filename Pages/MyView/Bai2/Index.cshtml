@@ -1,0 +1,44 @@
+@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model LoadDB_Razor.Pages.MyView.Bai2.Index
+@using LoadDB_Razor.Models;
+@{
+    Layout = "_Layout";
+}
+<a asp-page="Index1"></a>
+<h2>Welcome PRN211</h2>
+<table>
+    <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td>Gender</td>
+        <td>Department</td>
+        <td>DOB</td>
+        <td>GPA</td>
+    </tr>
+    @foreach (Student s in Model.Students)
+    {
+        <tr>
+            <td>@s.Id</td>
+            <td>@s.Name</td>
+            <td>@(s.Gender ? "Male" : "Female")</td>
+            <td>
+                @* @s.Depart.Name *@
+                <select>
+                    @foreach (Department d in Model.Departments)
+                    {
+                        if(s.DepartId.Equals(d.Id)){
+                            <option selected>@d.Name</option>
+                        }
+                        else{
+                            <option>@d.Name</option>
+                        }
+                    }
+                </select>
+            </td>
+
+            <td>@s.Dob</td>
+            <td>@s.Gpa</td>
+        </tr>
+    }
+</table>

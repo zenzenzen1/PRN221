@@ -1,0 +1,19 @@
+﻿@page
+@model LoadDB_Razor.Pages.SendData.SendDataTypeModel;
+@{
+}
+<h2>Int: @Model.Int</h2>
+<h2>Double: @Model.Double</h2>
+<h2>Bool: @Model.Bool</h2>
+<h2>DateTIme: @Model.DateTime</h2>
+<form method="post">
+    <label>Int</label>
+    <input asp-for="Int" /> <br />
+    <label>Double</label>
+    <input asp-for="Double" /> <br />
+    <label>Bool</label>
+    <input asp-for="Bool" /> <br />
+    <label>DateTIme</label>
+    <input asp-for="DateTime" /> <br />
+    <input type="submit" value="Submit" />
+</form>

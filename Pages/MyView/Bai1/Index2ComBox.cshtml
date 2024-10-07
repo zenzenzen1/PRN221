@@ -1,0 +1,39 @@
+@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model LoadDB_Razor.Pages.MyView.Bai1.IndexModel
+@using LoadDB_Razor.Models;
+@{
+    Layout = "Bai1/_Bai1Layout";
+}
+
+<h2>Welcome PRN211</h2>
+<table>
+    <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td>Gender</td>
+        <td>Department</td>
+        <td>DOB</td>
+        <td>GPA</td>
+    </tr>
+    @foreach (Student s in Model.Students)
+    {
+        <tr>
+            <td>@s.Id</td>
+            <td>@s.Name</td>
+            <td>
+                <select asp-items="@(new List<SelectListItem>(){
+                    new SelectListItem("Male", "male", s.Gender == true),
+                    new SelectListItem("Female", "Female", s.Gender == false),
+                })">
+                    @* <option>Male</option> *@
+                    @* <option  @(s.Gender ? "" : "selected")>Female</option> *@
+                    @* <option selected>Female</option> *@
+                </select>
+            </td>
+            <td>@s.Depart.Name</td>
+            <td>@s.Dob</td>
+            <td>@s.Gpa</td>
+        </tr>
+    }
+</table>
