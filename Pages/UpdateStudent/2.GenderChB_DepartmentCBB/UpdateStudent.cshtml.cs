@@ -23,7 +23,7 @@ namespace LoadDb.Pages.MyView.UpdateStudent2
             return Page();
         }
         
-        public void OnPost(string departmentId)
+        public IActionResult OnPost(string departmentId)
         {
             Student.DepartId = departmentId;
             System.Console.WriteLine(Student);
@@ -43,6 +43,7 @@ namespace LoadDb.Pages.MyView.UpdateStudent2
                 
             }
             // return RedirectToPage("../../Index/");
+            return RedirectToPage("/MyView/Index");
         }
     }
 }

@@ -6,8 +6,7 @@ namespace LoadDb.Pages.MyView.UpdateStudent5
 {
     public class UpdateStudentModel : PageModel
     {
-        [BindProperty]
-        public Student Student { get; set; } = null!;
+        public Student Student { get; set; }
         public IActionResult OnGet(int? id)
         {
             if(id == null)
@@ -23,23 +22,24 @@ namespace LoadDb.Pages.MyView.UpdateStudent5
             return Page();
         }
         
-        public IActionResult OnPost(string departmentId, string gender)
+        public IActionResult OnPost(IFormCollection form)
         {
-            Student.DepartId = departmentId;
-            var student = PRN221_DBContext.Instance.Students.Find(Student.Id);
+            var student = PRN221_DBContext.Instance.Students.Find(form["id"]);
             if(student != null){
-                student.Name = Student.Name;
+                string gender = form["gender"];
+                string departmentId = form["departmentId"];
                 student.Gender = gender == "male";
-                student.DepartId = Student.DepartId;
-                student.Dob = Student.Dob;
-                student.Dob = Student.Dob;
-                student.Gpa = Student.Gpa;
+                student.DepartId = departmentId;
+                student.Name = form["name"];
+                student.Gender = gender == "male";
+                student.Dob = DateTime.Parse(form["dob"]);
+                student.Gpa = double.Parse(form["gpa"]);
                 PRN221_DBContext.Instance.Attach(student);
                 PRN221_DBContext.Instance.SaveChanges();
-                Student = student;
+                Student = student; 
             }
             else{
-                
+                return Page();
             }
             return RedirectToPage("../../MyView/Index/");
         }

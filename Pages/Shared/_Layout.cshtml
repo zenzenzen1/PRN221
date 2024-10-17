@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] - LoadDB_Razor</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/LoadDB_Razor.styles.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
     <header>
@@ -32,13 +32,16 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/MyView/Index">Student</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/MyView/Index">Bài 1</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/MyView/Bai1/Index">Bài 1</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/MyView/Bai2/Index">Bài 2</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/MyView/Bai3/Index">Bài 3</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/stdView/Index">StdView</a>
                         </li>
                         @await RenderSectionAsync("navBarLink", required: false)
                     </ul>

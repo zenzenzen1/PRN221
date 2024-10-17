@@ -3,7 +3,6 @@
 @using LoadDB_Razor.Models;
 @{
 }
-
 <form method="post">
     <table>
         <tr>
@@ -42,7 +41,8 @@
                 {
                     <input 
                         type="radio" id="@department.Id" name="departmentId" value="@department.Id" 
-                        @(Model.Student != null && Model.Student.DepartId == department.Id ? "checked" : "") />
+                        checked
+                    />
                     <label for="@department.Id">@department.Name</label> <br />
                 }
             </td>

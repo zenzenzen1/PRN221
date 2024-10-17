@@ -19,14 +19,14 @@ namespace LoadDb.Pages.CreateStudent4
         {
         }
         
-        public void OnPost(IFormCollection form){
+        public IActionResult OnPost(IFormCollection form){
             string gender = form["gender"];
             string departmentId = form["departmentId"];
             Student.Gender = gender == "male";
             Student.DepartId = departmentId;
-            System.Console.WriteLine(Student);
+            Console.WriteLine(Student);
             studentService.CreateStudent(Student);
-            
+            return RedirectToPage("/MyView/Index");
         }
     }
 }

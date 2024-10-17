@@ -13,11 +13,12 @@ namespace LoadDb.Pages.CreateStudent5
         {
         }
         
-        public void OnPost(string gender, string departmentId){
+        public IActionResult OnPost(string gender, string departmentId){
             Student.Gender = gender == "male";
             Student.DepartId = departmentId;
-            System.Console.WriteLine(Student);
             new StudentService().CreateStudent(Student);
+            
+            return RedirectToPage("/MyView/Index");
         }
     }
 }

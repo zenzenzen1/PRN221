@@ -25,7 +25,7 @@
                 <input type="radio" @(s.Gender ? "checked" : "") /> Male
                 <input type="radio" @(s.Gender ? "" : "checked") /> Female
             </td>
-            <td>@s.Depart.Name</td>
+            <td>@s.Depart?.Name</td>
             <td>@s.Dob</td>
             <td>@s.Gpa</td>
         </tr>

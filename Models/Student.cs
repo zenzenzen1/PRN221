@@ -12,7 +12,7 @@ namespace LoadDB_Razor.Models
         public DateTime? Dob { get; set; }
         public double Gpa { get; set; }
 
-        public virtual Department Depart { get; set; } = null!;
+        public virtual Department? Depart { get; set; } = null!;
         
         public override string ToString()
         {

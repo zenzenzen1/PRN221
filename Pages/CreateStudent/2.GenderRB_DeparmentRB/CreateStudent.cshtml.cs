@@ -1,8 +1,8 @@
+using System.Text.Json;
 using LoadDb.Services.StudentService;
 using LoadDB_Razor.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Newtonsoft.Json;
 
 namespace LoadDb.Pages.CreateStudent2
 {
@@ -20,12 +20,12 @@ namespace LoadDb.Pages.CreateStudent2
         {
         }
         
-        public void OnPost(string gender, string departmentId){
-            // Department department = JsonConvert.DeserializeObject<Department>(departmentId) ?? new Department();
-            Student.Gender = gender == "male";
-            Student.DepartId = departmentId;
-            System.Console.WriteLine(Student);
+        public IActionResult OnPost()
+        {
+            
+            
             studentService.CreateStudent(Student);
+            return RedirectToPage("/MyView/Index");
         }
     }
 }

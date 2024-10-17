@@ -1,3 +1,4 @@
+using LoadDb.Services.StudentService;
 using LoadDB_Razor.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,8 +13,12 @@ namespace LoadDb.Pages.CreateStudent6
         {
         }
         
-        public void OnPost(string gender, string departmentId){
-            
+        public IActionResult OnPost(string gender, string departmentId){
+            Student.Gender = gender == "male";
+            Student.DepartId = departmentId;
+            new StudentService().CreateStudent(Student);
+
+            return RedirectToPage("/MyView/Index");
         }
     }
 }

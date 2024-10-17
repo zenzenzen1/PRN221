@@ -2,11 +2,19 @@ using LoadDb.Services.StudentService;
 using LoadDB_Razor.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+var services = builder.Services;
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<PRN221_DBContext>();
 builder.Services.AddSingleton<StudentService>();
+
+services.AddSession();
+services.AddMemoryCache();
+services.AddMvc();
+
+services.AddSession(options => {
+});
 
 builder.Services.AddControllersWithViews()
     .AddNewtonsoftJson(options =>
@@ -25,6 +33,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseSession();
 
 app.UseRouting();
 

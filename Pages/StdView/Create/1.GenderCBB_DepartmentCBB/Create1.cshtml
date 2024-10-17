@@ -1,0 +1,69 @@
+﻿@page "/StdView/Create1"
+@model LoadDB_Razor.Pages.StdView.Create1.CreateModel1
+@{
+}
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Student</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+    
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Student.Id" class="control-label"></label>
+                <input asp-for="Student.Id" class="form-control" />
+                <span asp-validation-for="Student.Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Student.Name" class="control-label"></label>
+                <input asp-for="Student.Name" class="form-control" />
+                <span asp-validation-for="Student.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-2">
+                Gender: <select asp-for="Student.Gender" asp-items="@(new List<SelectListItem>(){
+                    new SelectListItem("Male", "True", Model.Student != null && Model.Student.Gender == true),
+                    new SelectListItem("Female", "False", Model.Student != null && Model.Student.Gender == false){
+                    },
+                })">
+                </select>
+            </div>
+            <div class="form-group">
+                Department: 
+                <select 
+                    asp-for="Student.DepartId" 
+                    asp-items="@PRN221_DBContext.Instance.Departments.Select(d => new SelectListItem(d.Name, d.Id))">
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Student.Dob" class="control-label"></label>
+                <input type="date" asp-for="Student.Dob" class="form-control" />
+                <span asp-validation-for="Student.Dob" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Student.Gpa" class="control-label"></label>
+                <input asp-for="Student.Gpa" class="form-control" />
+                <span asp-validation-for="Student.Gpa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="../../Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

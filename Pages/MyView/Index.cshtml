@@ -1,9 +1,10 @@
-﻿@page
+﻿@page 
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model LoadDB_Razor.Pages.MyView.IndexModel
 @using LoadDB_Razor.Models;
 @{
-    Layout = "Bai1/_Bai1Layout";
+    @* Layout = "Bai1/_Bai1Layout"; *@
+    Layout = "_Layout";
 }
 <a asp-page="Index1"></a>
 <h2>Welcome PRN211</h2>
@@ -18,7 +19,7 @@
         <td>GPA</td>
         <td>Action</td>
     </tr>
-    @foreach (Student s in Model.Students.OrderByDescending(s => s.Id))
+    @foreach (Student s in Model.Students.OrderBy(s => s.Id))
     {
         <tr>
             <td>@s.Id</td>
@@ -36,3 +37,12 @@
         </tr>
     }
 </table>
+
+@section Styles{
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+}

@@ -11,7 +11,7 @@
                 <label asp-for="Student.Id "></label>
             </td>
             <td>
-                <input asp-for="Student.Id" />
+                <input type="number" name="id" value="@Model.Student.Id" />
             </td>
         </tr>
         <tr>
@@ -20,7 +20,7 @@
 
             </td>
             <td>
-                <input asp-for="Student.Name" />
+                <input name="name" value="@Model.Student.Name"/>
             </td>
         </tr>
         <tr>
@@ -57,7 +57,7 @@
                 <label asp-for="Student.Dob"></label>
             </td>
             <td>
-                <input asp-for="Student.Dob" />
+                <input name="dob" type="date" value="@Model.Student?.Dob"/>
             </td>
         </tr>
         <tr>
@@ -65,7 +65,7 @@
                 <label asp-for="Student.Gpa"></label>
             </td>
             <td>
-                <input asp-for="Student.Gpa" />
+                <input name="gpa" type="number" value="@Model.Student.Gpa"/>
             </td>
     </table>
     <button type="submit">Update</button>

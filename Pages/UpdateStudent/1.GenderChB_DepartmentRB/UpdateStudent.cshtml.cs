@@ -23,10 +23,9 @@ namespace LoadDb.Pages.MyView.UpdateStudent1
             return Page();
         }
         
-        public void OnPost(string departmentId)
+        public IActionResult OnPost(string departmentId)
         {
             Student.DepartId = departmentId;
-            System.Console.WriteLine(Student);
             var student = PRN221_DBContext.Instance.Students.Find(Student.Id);
             if(student != null){
                 student.Name = Student.Name;
@@ -39,7 +38,7 @@ namespace LoadDb.Pages.MyView.UpdateStudent1
                 PRN221_DBContext.Instance.SaveChanges();
                 Student = student;
             }
-            // return RedirectToPage("../../Index/");
+            return RedirectToPage("/MyView/Index");
         }
     }
 }

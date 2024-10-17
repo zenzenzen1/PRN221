@@ -1,0 +1,107 @@
+﻿@page "/stdView/Index"
+@model LoadDB_Razor.Pages.StdView.IndexModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<form  method="post">
+<input type="radio" id="allDepartment" asp-for="departmentId" value="" checked/> <label for="allDepartment">All</label> <br /> 
+@foreach(var department in PRN221_DBContext.Instance.Departments){
+    <input type="radio" value="@department.Id" asp-for="departmentId" id="@department.Id"/> <label for="@department.Id">@department.Name</label> <br />
+    
+}
+<button type="submit" name="searchButton" value="Search" class="btn btn-primary">Search</button>
+<table class="table">
+    <thead>
+            <tr>
+                <th>
+                    <input asp-for="CurrentDepartmentId" type="hidden" />
+                    <button type="submit" id="btnIdSort" class="btn btn-primary" name="btnIdSort" value="btnIdSort">Id</button>
+                    <input  type="hidden" value='@(Model.IdFlag ? "True" : "False")' name="idFlag" id="idFlag"/>
+                </th>
+                <th>
+                    <button type="submit" id="btnNameSort" class="btn btn-primary" name="btnNameSort" value="btnNameSort">Name</button>
+                    <input type="hidden" value='@(Model.NameFlag ? "True" : "False")' name="nameFlag" id="nameFlag"/>
+                    @* @Html.DisplayNameFor(model => model.Student[0].Name) *@
+                </th>
+                <th>
+                    <button type="submit" class="btn btn-primary" name="btnGenderSort" value="btnGenderSort">Gender</button>
+                    <input type="hidden"value='@(Model.GenderFlag ? "True" : "False")' name="genderFlag" id="genderFlag"/>
+                    @* @Html.DisplayNameFor(model => model.Student[0].Gender) *@
+                </th>
+                <th>
+                    <button type="submit" class="btn btn-primary" name="btnDobSort" value="btnDobSort">Dob</button>
+                    <input type="hidden" value='@(Model.DobFlag ? "True" : "False")' name="dobFlag" id="dobFlag"/>
+                </th>
+                <th>
+                    <button type="submit" class="btn btn-primary" name="btnGpaSort" value="btnGpaSort">Gpa</button>
+                    <input type="hidden" value='@(Model.GpaFlag ? "True" : "False")' name="gpaFlag" id="gpaFlag"/>
+                </th>
+                <th>
+                    <button type="submit" class="btn btn-primary" name="btnDepartSort" value="btnDepartSort">Depart</button>
+                    <input type="hidden" value='@(Model.DepartFlag ? "True" : "False")' name="departFlag" id="departFlag" />
+                </th>
+                <th>
+                </th>
+            </tr>
+        
+    </thead>
+    <tbody>
+</form>
+@foreach (var item in Model.Student ?? PRN221_DBContext.Instance.Students.ToList() ) {
+        <tr>
+            <td>@Html.DisplayFor(s => item.Id)</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @* @Html.DisplayFor(modelItem => item.Gender) *@
+                @* @(item.Gender ? "Male" : "Female") *@
+                <input type="radio" value="male" @(item.Gender ? "checked" : "") /> Male
+                <input type="radio" value="female" @(item.Gender ? "" : "checked") /> Female
+
+
+                <select name="gender" asp-items="@(new List<SelectListItem>(){
+                    new SelectListItem("Male", "male", Model.Student != null && item.Gender == true),
+                    new SelectListItem("Female", "Female", Model.Student != null && item.Gender == false){
+                    },
+                })">
+                </select>
+            </td>
+            <td>
+                @if(item.Dob != null)
+                    @(((DateTime)item.Dob).ToString("dd/MM/yyyy"))
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gpa)
+            </td>
+            <td>
+                @if(item.Depart != null)
+                    @Html.DisplayFor(modelItem => item.Depart.Name)
+                else
+                    @PRN221_DBContext.Instance.Departments.Find(item.DepartId)?.Name
+                
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@section Scripts{
+    <script>
+        $("#btnIdSearch").click((e) => {
+            @* @Model.Student = null; *@
+        })
+    </script>
+}

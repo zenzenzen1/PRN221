@@ -2,6 +2,8 @@
 @model LoadDb.Pages.CreateStudent2.CreateStudentModel
 @using LoadDB_Razor.Models;
 @using Newtonsoft.Json;
+
+
 @{
     <form method="post">
         <table>
@@ -29,10 +31,13 @@
                     <label for="gender">Gender</label>
                 </td>
                 <td>
+                    @*
                     <input type="radio" id="genderMale" name="gender" value="male" @(Model.Student != null && Model.Student.Gender ? "checked" : "") /> 
                     <label for="genderMale">Male</label>
                     <input type="radio" id="genderFemale" name="gender" value="female" @(Model.Student != null && Model.Student.Gender ? "" : "checked")/> 
-                    <label for="genderFemale">Female</label>
+                    <label for="genderFemale">Female</label> *@
+                    <input asp-for="Student.Gender" type="radio" value="@true" checked/> Male
+                    <input asp-for="Student.Gender" type="radio" value="@false" /> Female
                 </td>
             </tr>
             <tr>
@@ -40,12 +45,19 @@
                     <label >Department</label>
                 </td>
                 <td>
-                    @foreach (var department in PRN221_DBContext.Instance.Departments)
+                    @* @foreach (var department in PRN221_DBContext.Instance.Departments)
                     {
                         <input 
                             type="radio" id="@department.Id" name="departmentId" value="@department.Id" 
-                            @(Model.Student != null && Model.Student.DepartId == department.Id ? "checked" : "") />
+                            checked
+
+                        />
                         <label for="@department.Id">@department.Name</label> <br />
+                    }
+                    *@
+                    @foreach (var department in PRN221_DBContext.Instance.Departments)
+                    {
+                        <input type="radio" asp-for="Student.DepartId" value="@department.Id" checked/> @department.Name <br />
                     }
                 </td>
             </tr>

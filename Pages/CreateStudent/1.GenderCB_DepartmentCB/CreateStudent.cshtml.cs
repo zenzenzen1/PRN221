@@ -20,20 +20,20 @@ namespace LoadDb.Pages.CreateStudent1
         {
         }
         
-        public void OnPost(string? gender, string departmentId)
+        public IActionResult OnPost(string? gender, string departmentId)
         {
             // if(departmentId == null)
             // {
             //     return;
             // }
-            System.Console.WriteLine(departmentId);
             
             if (Student != null)
             {
                 Student.Gender = !string.IsNullOrEmpty(gender);
                 Student.DepartId = departmentId;
-                // studentService.CreateStudent(Student);
+                studentService.CreateStudent(Student);
             }
+            return RedirectToPage("/MyView/Index");
         }
     }
 }
